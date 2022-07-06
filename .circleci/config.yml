@@ -1,13 +1,9 @@
 version: 2.1
 
 commands:
-  print_pipeline_id:
-    parameters:
-      id:
-        type: string
-        
+  print_pipeline_id        
     steps:
-      - run: echo << parameters.id >>
+      - run: ${CIRCLE_WORKFLOW_ID}
 
 
 
@@ -17,9 +13,10 @@ jobs:
       - image: circleci/node:13.8.0  
     steps:
       - print_pipeline_id:   # invoke command "print-pipeline_id"
-          id: ${CIRCLE_WORKFLOW_ID}
+          
 
 workflows:
-  jobs:
-    - print_id
-     
+  my_workflow:
+    jobs:
+      - print_id
+      
